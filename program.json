@@ -1,0 +1,10 @@
+{
+    "program": "sandbox.aleo",
+    "version": "0.0.0",
+    "description": "",
+    "development": {
+        "private_key": "APrivateKey1zkp8XxMwqfW8yn9f2ekmqT32Nzp7RDJ2KVyc4iEQqdsXkd4",
+        "address": "aleo15q8xskjlj0f406a9fxwkledxjpwrhllxwwsytvunmtewln6jugrspgcutw"
+    },
+    "license": "MIT"
+}
