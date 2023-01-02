@@ -2,16 +2,11 @@ import challenge.aleo;
 import masked_challenge.aleo;
 import segment.aleo;
 import scored_guess.aleo;
+import score.aleo;
 import guess.aleo;
+import hash.aleo;
 
 program sandbox.aleo;
-
-struct segs:
-    a0 as u64;
-    a1 as u64;
-    a2 as u64;
-    a3 as u64;
-    a4 as u64;
 
 struct matches:
     a0 as u8;
@@ -19,30 +14,6 @@ struct matches:
     a2 as u8;
     a3 as u8;
     a4 as u8;
-
-// perform bitwise operations to split u64 into ascii array of "segs"
-closure u64_to_segs:
-    input r0 as u64;
-
-    // index 0, 4
-    shr r0 28u8 into r1;
-    and r0 127u64 into r2;
-
-    // index 1
-    shr r0 21u8 into r3;
-    and r3 127u64 into r4;
-
-    // index 2
-    shr r0 14u8 into r5;
-    and r5 127u64 into r6;
-
-    // index 3
-    shr r0 7u8 into r7;
-    and r7 127u64 into r8;
-
-    cast r1 r4 r6 r8 r2 into r9 as segs;
-
-    output r9 as segs;
 
 // p1 challenge
 function new_challenge:
@@ -64,38 +35,18 @@ function new_guess:
 
     output r2 as guess.aleo/guess.record;
 
-// helper hashing function
-closure h:
-    input r0 as u64; // v
-    input r1 as u64; // s
-
-    hash.psd8 r0 into r2;
-    hash.psd8 r1 into r3;
-    add r2 r3 into r4; 
-    hash.psd8 r4 into r5;
-
-    output r5 as field;
-
 // p1 scores guess
 function score_guess:
     input r0 as challenge.aleo/challenge.record; // must provide original challenge
     input r1 as guess.aleo/guess.record;
 
     // challenge salt and word must be correct
-    call h r0.word r0.salt into r2; 
-    assert.eq r2 r1.hashed_word;
+    call hash.aleo/h r0.word r0.salt into r2; 
+    //assert.eq r2 r1.hashed_word;
 
-    // decode to array of ascii encoded vals
-    call u64_to_segs r0.word into r3;
-    call u64_to_segs r1.word into r4;
-
-    call segment.aleo/score_seg r3.a0 0u8 r4 into r5;
-    call segment.aleo/score_seg r3.a1 1u8 r4 into r6;
-    call segment.aleo/score_seg r3.a2 2u8 r4 into r7;
-    call segment.aleo/score_seg r3.a3 3u8 r4 into r8;
-    call segment.aleo/score_seg r3.a4 4u8 r4 into r9;
+    call score.aleo/score r0.word r1.word into r3 r4 r5 r6 r7;
 
     // todo: replace with guess response
-    call scored_guess.aleo/new r5 r6 r7 r8 r9 r1.player r0.hashed_word into r10;
+    call scored_guess.aleo/new r3 r4 r5 r6 r7 r1.player r0.hashed_word into r8;
 
-    output r10 as scored_guess.aleo/scored_guess.record;
+    output r8 as scored_guess.aleo/scored_guess.record;
