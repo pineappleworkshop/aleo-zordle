@@ -39,10 +39,10 @@ closure compare_segs:
     is.eq r2 r3 into r5;
     and r4 r5 into r6;
 
-    ternary r4 1u8 0u8 into r7;
-    ternary r6 2u8 r7 into r8;
+    ternary r4 1u64 0u64 into r7;
+    ternary r6 2u64 r7 into r8;
 
-    output r8 as u8;
+    output r8 as u64;
 
 // find seg in array.
 // also returns a "score" (see compare_segs)
@@ -58,8 +58,8 @@ function score_seg:
     call compare_segs r0 r2.a4 r1 4u8 into r7;
 
     // get the max value
-    gt r3 0u8 into r8;
-    ternary r8 r3 0u8 into r9;
+    gt r3 0u64 into r8;
+    ternary r8 r3 0u64 into r9;
     gt r4 r9 into r10;
     ternary r10 r4 r9 into r11;
     gt r5 r11 into r12;
@@ -69,4 +69,4 @@ function score_seg:
     gt r7 r15 into r16;
     ternary r16 r7 r15 into r17;
 
-    output r17 as u8.private;
+    output r17 as u64.private;

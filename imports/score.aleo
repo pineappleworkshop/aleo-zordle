@@ -1,3 +1,9 @@
+
+// doesn't work????
+// seems like functions can call functions, true; however,
+// functions cannot call functions that call functions.
+// maybe... you know, some docs here would b great.
+
 import segment.aleo;
 
 program score.aleo;
@@ -33,6 +39,20 @@ closure u64_to_segs:
 
     output r9 as segs;
 
+closure segs_to_u64:
+    input r0 as segs;
+    
+    shl r0.a0 32u8 into r1;
+    shl r0.a1 24u8 into r2;
+    and r1 r2 into r3;
+    shl r0.a2 16u8 into r4;
+    and r3 r4 into r5;
+    shl r0.a3 8u8 into r6;
+    and r5 r6 into r7;
+    and r7 r0.a4 into r8;
+
+    output r8 as u64;
+
 // p1 scores guess
 function score:
     input r0 as u64.private; 
@@ -48,8 +68,7 @@ function score:
     call segment.aleo/score_seg r2.a3 3u8 r3 into r7;
     call segment.aleo/score_seg r2.a4 4u8 r3 into r8;
 
-    output r4 as u8.private;
-    output r5 as u8.private;
-    output r6 as u8.private;
-    output r7 as u8.private;
-    output r8 as u8.private;
+    cast r4 r5 r6 r7 r8 into r9 as segs;
+    call segs_to_u64 r9 into r10;
+
+    output r10 as u64.private;
