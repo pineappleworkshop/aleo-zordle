@@ -99,3 +99,24 @@ function score_guess:
     call scored_guess.aleo/new r5 r6 r7 r8 r9 r1.player r0.hashed_word into r10;
 
     output r10 as scored_guess.aleo/scored_guess.record;
+
+// testing only
+function score:
+    input r0 as u64.private; // must provide original challenge
+    input r1 as u64.private;
+
+    call u64_to_segs r0 into r2;
+    call u64_to_segs r1 into r3;
+
+    call segment.aleo/score_seg r2.a0 0u8 r3 into r4;
+    call segment.aleo/score_seg r2.a1 1u8 r3 into r5;
+    call segment.aleo/score_seg r2.a2 2u8 r3 into r6;
+    call segment.aleo/score_seg r2.a3 3u8 r3 into r7;
+    call segment.aleo/score_seg r2.a4 4u8 r3 into r8;
+
+    output r4 as u8.private;
+    output r5 as u8.private;
+    output r6 as u8.private;
+    output r7 as u8.private;
+    output r8 as u8.private;
+
