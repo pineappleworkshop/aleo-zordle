@@ -5,7 +5,7 @@ record guess:
     gates as u64.private;
     word as u64.private;
     player as address.private;
-    hashed_word as field.private;
+    challenge_hashed_word as field.private;
 
 function new:
     input r0 as u64.private; // word 

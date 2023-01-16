@@ -10,7 +10,8 @@ struct matches:
 record scored_guess:
     owner as address.private; // player
     gates as u64.private;
-    hashed_word as field.private;
+    challenge_hashed_word as field.private;
+    word as u64.private;
     matches as matches.private;
 
 // todo: clean up
@@ -22,9 +23,10 @@ function new:
     input r4 as u8.private;
 
     input r5 as address.private; // owner
-    input r6 as field.private; // hashed word
+    input r6 as field.private; // challenge hashed word
+    input r7 as u64.private; // guess word
 
-    cast r0 r1 r2 r3 r4 into r7 as matches;
-    cast r5 0u64 r6 r7 into r8 as scored_guess.record;
+    cast r0 r1 r2 r3 r4 into r8 as matches;
+    cast r5 0u64 r6 r7 r8 into r9 as scored_guess.record;
 
-    output r8 as scored_guess.record;
+    output r9 as scored_guess.record;

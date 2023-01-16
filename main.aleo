@@ -1,5 +1,5 @@
 import challenge.aleo;
-import masked_challenge.aleo;
+import player_challenge.aleo;
 import segment.aleo;
 import scored_guess.aleo;
 import guess.aleo;
@@ -44,23 +44,30 @@ closure u64_to_segs:
 
     output r9 as segs;
 
-// p1 challenge
+// p1 creates challenge - not to be given to p2
 function new_challenge:
     input r0 as u64.private; // encoded word guess g
     input r1 as u64.private; // salt s
 
     call challenge.aleo/new r0 r1 into r2;
-    call masked_challenge.aleo/new r2 into r3;
 
-    output r2 as challenge.aleo/challenge.record; // keep secret
-    output r3 as masked_challenge.aleo/masked_challenge.record; // give to p2
+    output r2 as challenge.aleo/challenge.record;
+
+// p1 creates player challenge for p2
+function new_player_challenge:
+    input r0 as address.private; // p2
+    input r1 as challenge.aleo/challenge.record; // challenge
+
+    call player_challenge.aleo/new r0 r1.hashed_word into r2;
+
+    output r2 as player_challenge.aleo/player_challenge.record; // give to p2
 
 // p2 guess
 function new_guess:
     input r0 as u64.private; // encoded word guess g
-    input r1 as masked_challenge.aleo/masked_challenge.record;
+    input r1 as player_challenge.aleo/player_challenge.record;
 
-    call guess.aleo/new r0 r1.hashed_word r1.owner into r2;
+    call guess.aleo/new r0 r1.challenge_hashed_word r1.owner into r2;
 
     output r2 as guess.aleo/guess.record;
 
@@ -83,7 +90,7 @@ function score_guess:
 
     // challenge salt and word must be correct
     call h r0.word r0.salt into r2; 
-    assert.eq r2 r1.hashed_word;
+    assert.eq r2 r1.challenge_hashed_word;
 
     // decode to array of ascii encoded vals
     call u64_to_segs r0.word into r3;
@@ -96,14 +103,14 @@ function score_guess:
     call segment.aleo/score_seg r3.a4 4u8 r4 into r9;
 
     // todo: replace with guess response
-    call scored_guess.aleo/new r5 r6 r7 r8 r9 r1.player r0.hashed_word into r10;
+    call scored_guess.aleo/new r5 r6 r7 r8 r9 r1.player r0.hashed_word r1.word into r10;
 
     output r10 as scored_guess.aleo/scored_guess.record;
 
-// testing only
+// score word w 1 and 2
 function score:
-    input r0 as u64.private; // must provide original challenge
-    input r1 as u64.private;
+    input r0 as u64.private; // w1
+    input r1 as u64.private; // w2
 
     call u64_to_segs r0 into r2;
     call u64_to_segs r1 into r3;
