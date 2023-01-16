@@ -7,11 +7,11 @@ program segment.aleo;
 //
 // let x be the ASCII encoding of a capital letter in the english alphabet.
 // we can use the following to encode each letter in our word: f(x) = (x - 65) * 32 + x
-// we can represent the binary representation of f(x) as b so that a word w = {b_1,b_2,...,b_5}
+// we can represent the binary representation of f(x) as b so that a word = {b_1,b_2,...,b_n}
 // 
-// i.e. {A:1100001, B:1100010, C:1100011,..., Z:1111010}
+// i.e. {A:1000001, B:1000010, C:1000011,..., Z:1011010}
 // 
-// finally we can convert our byte array into u64 and perform bitwise operations to compare words
+// finally we can convert our byte array into u64 and use bitwise operations to compare and score words
 
 // ascii encoded array of segments or "segs"
 struct segs:
@@ -24,7 +24,7 @@ struct segs:
 // helper function to compare "segments" consisting
 // of an ascii encoded character and an index.
 //
-// returns a "score"
+// returns a "score" defined below:
 // 2, identical chars and indexes | 
 // 1, identical chars and different indexes | 
 // 0, neither

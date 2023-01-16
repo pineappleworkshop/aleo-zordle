@@ -6,6 +6,11 @@ import guess.aleo;
 
 program sandbox.aleo;
 
+// NOTE
+// encoding words as u64s to be split into segments or "segs" will help keep the code - and records - neat
+
+// in aleo instructions, any/all referenced structs need to be declared explicitly
+// segments.aleo
 struct segs:
     a0 as u64;
     a1 as u64;
@@ -13,6 +18,7 @@ struct segs:
     a3 as u64;
     a4 as u64;
 
+// scored_guess.aleo
 struct matches:
     a0 as u8;
     a1 as u8;
@@ -107,8 +113,8 @@ function score_guess:
 
     output r10 as scored_guess.aleo/scored_guess.record;
 
-// score word w 1 and 2
-function score:
+// testing only: score word w 1 and 2
+function score_words:
     input r0 as u64.private; // w1
     input r1 as u64.private; // w2
 

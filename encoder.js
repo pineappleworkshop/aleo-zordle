@@ -5,6 +5,7 @@ function encodeCharAsBinary(v){
 }
 
 function encodeWordAsByteArray(word){
+    console.log(encodeCharAsBinary(word))
     return word.split("").map(encodeCharAsBinary) 
 }
 
