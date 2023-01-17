@@ -1,4 +1,4 @@
-# Zordle
+# Zordle (zk-wordle)
 
 Based on the popular game, "wordle" (https://www.nytimes.com/games/wordle/index.html)
 
@@ -7,20 +7,21 @@ Based on the popular game, "wordle" (https://www.nytimes.com/games/wordle/index.
 _it is important to note that this app is merely a biproduct of a single developer's attempt at tackling zk-proofs and
 and exploring the aleo platform, although playable, it is far from finished._
 
-Firstly, there is no game state. Unlike the original game, players can submit as many guesses as they like and there
+- Firstly, there is no game state. Unlike the original game, players can submit as many guesses as they like and there
 is no logic for when the game is won. In future implementations, challengers' guess attempts will be restricted by some
 owner specifed ruleset. Scoring will be based on how many attempts consumed before the win.
 
-Lacking contraints. Currently, it is possible to cheat the game in more ways than one. However, these methods are
+- Lacking contraints. Currently, it is possible to cheat the game in more ways than one. However, these methods are
 trivial to fix and certainly will be in future implementations.
 
-At some point, would love to pair this with reactle (https://reactle.vercel.app) an open-source wordle clone in react.
+- At some point, would love to pair this with reactle (https://reactle.vercel.app) an open-source wordle clone in react.
 This would really bring zordle to life!
 
 ## Dependencies
 
-1. aleo instructions: https://developer.aleo.org/aleo/installation
-2. node (used for encoder.js): https://nodejs.org/en/download/
+- aleo instructions: https://developer.aleo.org/aleo/installation
+
+- node (used for encoder.js): https://nodejs.org/en/download/
 
 ## Build
 
@@ -257,7 +258,7 @@ $ aleo run score_guess '{
 }
 ```
 
-the score: {2,2,2,0,1}
+score: {2,2,2,0,1} (see "Guess Scoring" for more info)
 
 _although the game doesn't currently maintain state, p2 might continue by guessing again with the information they were
 given. eventually, the correct answer will yield a score of {2,2,2,2,2}_
