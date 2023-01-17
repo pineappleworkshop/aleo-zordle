@@ -1,21 +1,21 @@
 # Zordle
 
-based on the popular game, "wordle" (https://www.nytimes.com/games/wordle/index.html)
+Based on the popular game, "wordle" (https://www.nytimes.com/games/wordle/index.html)
 
 ## Work in Progress!
 
 _it is important to note that this app is merely a biproduct of a single developer's attempt at tackling zk-proofs and
 and exploring the aleo platform, although playable, it is far from finished._
 
-firstly, there is no game state. unlike the original game, players can submit as many guesses as they like and there
-is no logic for when the game is won. in future implementations, challengers' guess attempts will be restricted by some
-owner specifed ruleset. scoring will be based on how many attempts consumed before the win.
+Firstly, there is no game state. Unlike the original game, players can submit as many guesses as they like and there
+is no logic for when the game is won. In future implementations, challengers' guess attempts will be restricted by some
+owner specifed ruleset. Scoring will be based on how many attempts consumed before the win.
 
-lacking contraints. currently, it is possible to cheat the game in more ways than one. however, these methods are
+Lacking contraints. Currently, it is possible to cheat the game in more ways than one. However, these methods are
 trivial to fix and certainly will be in future implementations.
 
-at some point, would love to pair this with reactle (https://reactle.vercel.app) an open-source wordle clone in react.
-this would really bring zordle to life!
+At some point, would love to pair this with reactle (https://reactle.vercel.app) an open-source wordle clone in react.
+This would really bring zordle to life!
 
 ## Dependencies
 
@@ -30,12 +30,12 @@ $ aleo build
 
 ## Gameplay
 
-a player creates a challenge with an secret word. other players try to guess the word by submitting their own. with each 
+A player creates a challenge with an secret word. Other players try to guess the word by submitting their own. With each 
 guess, you're told which of your letters exist in the secret word, and if they are in the correct position.
 
 ### Guess Scoring
 
-guesses are scored with a set of enums, with one integer per character.
+Guesses are scored with a set of enums, with one integer per character.
 
 ```
 2: identical chars and indexes  
@@ -54,7 +54,7 @@ score:     {2,2,2,0,1}
 ### Guide
 <details><summary>Commands and Playing the Game</summary>
 
-let's create 2 new accounts, player 1 or p1 and p2 respectively. 
+Let's create 2 new accounts, player 1 or p1 and p2 respectively. 
 ```bash
 $ aleo account new
 
@@ -69,10 +69,10 @@ $ aleo account new
       Address  aleo1y8jref9s6feavph9925tscwmepzvtrrm3gfemlxe0reezh0j4yys3lvmyy
 ```
 
-to start the game, p1 needs to create a challenge but first copy p1's creds into the program.json.
+To start the game, p1 needs to create a challenge but first copy p1's creds into the program.json.
 
-next, we need to specify a 5-letter word for p2 to guess. since aleo instructions doesn't support strings, words are to be 
-encoded as u64s with encoder.js. we can encode the word "first" like so:
+Next, we need to specify a 5-letter word for p2 to guess. since aleo instructions doesn't support strings, words are to be 
+encoded as u64s with encoder.js. We can encode the word "first" like so:
 
 ```bash
 $ node encoder.js first
@@ -80,7 +80,7 @@ $ node encoder.js first
 >>> 18944928212
 ```
 
-now we can create a challenge with the encoded word, 18944928212 and salt, 12345678910.
+Now we can create a challenge with the encoded word, 18944928212 and salt, 12345678910.
 
 ```bash
 # aleo run new_challenge <word_as_u64> <salt_u64>
@@ -112,7 +112,7 @@ $ aleo run new_challenge 18944928212u64 12345678910u64
 ✅ Executed 'zordle.aleo/new_challenge'
 ```
 
-next we have to create a player_challenge to issue to a specific player. _in future iterations this record will maintain 
+Next we have to create a player_challenge to issue to a specific player. _in future iterations this record will maintain 
 game state_
 
 ```bash
@@ -152,9 +152,9 @@ $ aleo run new_player_challenge aleo1y8jref9s6feavph9925tscwmepzvtrrm3gfemlxe0re
 ✅ Executed 'zordle.aleo/new_player_challenge'
 ```
 
-now switch to p2 and create a guess.
+Now switch to p2 and create a guess.
 
-encode the word "fires"
+Encode the word "fires"
 
 ```bash
 $ node encoder.js fires
@@ -162,7 +162,7 @@ $ node encoder.js fires
 >>> 18944926419
 ```
 
-create guess
+and create a guess
 
 ```bash
 # aleo run new_guess <word_as_u64> <player_challenge>
@@ -201,7 +201,7 @@ $ aleo run new_guess 18944926419u64 '{
 ✅ Executed 'zordle.aleo/new_guess'
 ```
 
-lastly, switch back to p1 and score the guess. 
+Lastly, switch back to p1 and score the guess. 
 
 ```bash
 # aleo run score_guess <challenge> <guess>
@@ -257,7 +257,7 @@ $ aleo run score_guess '{
 }
 ```
 
-our score: {2,2,2,0,1}
+the score: {2,2,2,0,1}
 
 _although the game doesn't currently maintain state, p2 might continue by guessing again with the information they were
 given. eventually, the correct answer will yield a score of {2,2,2,2,2}_
