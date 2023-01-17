@@ -5,7 +5,6 @@ function encodeCharAsBinary(v){
 }
 
 function encodeWordAsByteArray(word){
-    console.log(encodeCharAsBinary(word))
     return word.split("").map(encodeCharAsBinary) 
 }
 
@@ -16,11 +15,8 @@ function encodeWord(word){
 
 function main(){
     const args = process.argv.slice(2)
-    const guess = args[0]
-    const challenge = args[1]
-
-    console.log("guess: ", guess, encodeWord(guess))
-    console.log("challenge: ", challenge, encodeWord(challenge))
+    const word = args[0]
+    console.log(encodeWord(word))
 }
 
 main()

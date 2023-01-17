@@ -4,7 +4,7 @@ import segment.aleo;
 import scored_guess.aleo;
 import guess.aleo;
 
-program sandbox.aleo;
+program zordle.aleo;
 
 // NOTE
 // encoding words as u64s to be split into segments or "segs" will help keep the code - and records - neat
