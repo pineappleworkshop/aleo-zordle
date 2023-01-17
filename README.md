@@ -7,15 +7,15 @@ based on the popular game, "wordle" (https://www.nytimes.com/games/wordle/index.
 _it is important to note that this app is merely a biproduct of a single developer's attempt at tackling zk-proofs and
 and exploring the aleo platform, although playable, it is far from finished._
 
-there is no game state. unlike the original game, players can submit as many guesses as they like and there
+firstly, there is no game state. unlike the original game, players can submit as many guesses as they like and there
 is no logic for when the game is won. in future implementations, challengers' guess attempts will be restricted by some
 owner specifed ruleset. scoring will be based on how many attempts consumed before the win.
 
-at some point, would love to pair this with reactle (https://reactle.vercel.app) an open-source wordle clone in react.
-this would really bring zordle to life!
-
 lacking contraints. currently, it is possible to cheat the game in more ways than one. however, these methods are
 trivial to fix and certainly will be in future implementations.
+
+at some point, would love to pair this with reactle (https://reactle.vercel.app) an open-source wordle clone in react.
+this would really bring zordle to life!
 
 ## QuickStart
 
@@ -29,16 +29,17 @@ $ aleo build
 
 guesses are scored with a set of enums, with one integer per character.
 
+```
+2, identical chars and indexes | 
+1, identical chars and different indexes | 
+0, neither
+```
+
 e.g.
 
 challenge: first
 guess:     fires
 score:     {2,2,2,0,1}
-
-2, identical chars and indexes | 
-1, identical chars and different indexes | 
-0, neither
-
 
 ### How to Play
 <details><summary>Commands and Playing the Game</summary>
@@ -246,7 +247,7 @@ $ aleo run score_guess '{
 }
 ```
 
-our guess score is as follows {2,2,2,0,1}
+our score: {2,2,2,0,1}
 
-although the game doesn't currently maintain state, p2 might continue by guessing again with the information they were
-given. eventually, the correct answer will yield a score of {2,2,2,2,2}
+_although the game doesn't currently maintain state, p2 might continue by guessing again with the information they were
+given. eventually, the correct answer will yield a score of {2,2,2,2,2}_
