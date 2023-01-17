@@ -30,16 +30,18 @@ $ aleo build
 guesses are scored with a set of enums, with one integer per character.
 
 ```
-2, identical chars and indexes | 
-1, identical chars and different indexes | 
-0, neither
+2: identical chars and indexes  
+1: identical chars and different indexes  
+0: neither
 ```
 
 e.g.
 
+```
 challenge: first
 guess:     fires
 score:     {2,2,2,0,1}
+```
 
 ### How to Play
 <details><summary>Commands and Playing the Game</summary>
