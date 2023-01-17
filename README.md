@@ -17,15 +17,23 @@ trivial to fix and certainly will be in future implementations.
 at some point, would love to pair this with reactle (https://reactle.vercel.app) an open-source wordle clone in react.
 this would really bring zordle to life!
 
-## QuickStart
+## Dependencies
 
-### Build
+1. aleo instructions: https://developer.aleo.org/aleo/installation
+2. node (used for encoder.js): https://nodejs.org/en/download/
+
+## Build
 
 ```bash
 $ aleo build
 ```
 
-### Scoring
+## Gameplay
+
+a player creates a challenge with an secret word. other players try to guess the word by submitting their own. with each 
+guess, you're told which of your letters exist in the secret word, and if they are in the correct position.
+
+### Guess Scoring
 
 guesses are scored with a set of enums, with one integer per character.
 
@@ -43,7 +51,7 @@ guess:     fires
 score:     {2,2,2,0,1}
 ```
 
-### How to Play
+### Guide
 <details><summary>Commands and Playing the Game</summary>
 
 let's create 2 new accounts, player 1 or p1 and p2 respectively. 
