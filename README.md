@@ -83,7 +83,6 @@ score:     {2,2,2,0,1}
 and obviously a correct guess would be {2,2,2,2,2}
 
 ### Guide
-<details><summary>Commands and Playing the Game</summary>
 
 Let's create 2 new accounts, player 1 or p1 and p2 respectively. 
 ```bash
