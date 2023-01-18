@@ -11,7 +11,7 @@ and exploring the aleo platform, although playable, it is far from finished._
 is no logic for when the game is won. In future implementations, challengers' guess attempts will be restricted by some
 owner specifed ruleset. Scoring will be based on how many attempts consumed before the win.
 
-- Lacking contraints. Currently, it is possible to cheat the game in more ways than one. However, these methods are
+- Lacking contraints. Currently, it is possible to cheat the game in more ways than one. However, these exploits are
 trivial to fix and certainly will be in future implementations.
 
 - At some point, would love to pair this with reactle (https://reactle.vercel.app) an open-source wordle clone in react.
@@ -28,6 +28,34 @@ This would really bring zordle to life!
 ```bash
 $ aleo build
 ```
+
+## Game Logic
+
+### Representing a Word as u64
+
+Since Aleo Instructions doesn't support strings we can use bit packing to encode words as unsigned 64 bit integers.
+
+The english alphabet supports 26 letters so we can use 5 bits per character: 2^5 = 32 
+
+Let x be the ASCII encoding of a capital letter in the english alphabet. We can use the following to encode each letter
+in our word: 
+__f(x) = (x - 65) * 32 + x__
+
+We can represent the binary representation of f(x) as b so that a word = {b_1,b_2,...,b_n}
+
+__i.e. {A:1000001, B:1000010, C:1000011,..., Z:1011010}__
+
+_take a look at encoder.js to see how this works in javascript_
+
+Finally we can convert our byte array into u64 and use bitwise operations to compare and score words.
+
+### Comparing u64 Words
+
+Using the encoding mechanism outlined in the section above, we can split an encoded word into "segments" and compare
+each segment of word 1 to each segment of word 2. Since loops are disallowed in Aleo Instructions, we can't have varying
+word lengths, thus we enforce that each word had a length of 5 characters, just like in the original Wordle game.
+
+Note: Leo _does_ support loops (https://developer.aleo.org/leo)
 
 ## Gameplay
 
@@ -51,6 +79,8 @@ challenge: first
 guess:     fires
 score:     {2,2,2,0,1}
 ```
+
+and obviously a correct guess would be {2,2,2,2,2}
 
 ### Guide
 <details><summary>Commands and Playing the Game</summary>
@@ -262,3 +292,45 @@ score: {2,2,2,0,1} (see "Guess Scoring" for more info)
 
 _although the game doesn't currently maintain state, p2 might continue by guessing again with the information they were
 given. eventually, the correct answer will yield a score of {2,2,2,2,2}_
+
+### Why Aleo?
+
+#### 01/18/23
+
+__Aleo__
+
+Privacy, speed, and decentralization are common platitudes of seemingly all new blockchain systems today. Unfortunately,
+in this space it is far too common to overpromise and underdeliver. Often chains prioritize one of these pillars
+while compromising another - all in the interest of development efficacy. However, I believe that Aleo differs from many
+chains in a unique way. __Aleo's protocol uses zero knowledge cryptography and zero knowledge proofs enabling transactions
+to be run trustlessly off chain, laying out the groundwork to intuitively build into privacy, speed, and 
+decentralization__. Meaning that Aleo can be developed uncompromisingly - provided that their protocol is scalable.
+
+__Development__
+
+In an effort to understand the fundamentals of Aleo, I opted to work with Aleo Instructions rather than their high level 
+language, Leo. Now, I can't speak to Leo becuase I'm unfamiliar but I'd probably recommend starting there instead.
+Development with Aleo Instructions is difficult, syntactically, conceptually, and otherwise. 
+
+Typical disadvantages of level languages aside, the docs are outtdated and sparse leading to a significant amount of 
+development time wasted on trial and error. At the time of writing this, some of the docs are incorrect as the 
+language is changing rapidly. For example, "interface" was changed to "struct" at some point, causing quite a bit of 
+confusion.
+
+Logic in Aleo is written with circuits, which is dissimilar to other paradigms I've worked with. I won't go into
+details about them but here's a good article: 
+https://medium.com/web3studio/simple-explanations-of-arithmetic-circuits-and-zero-knowledge-proofs-806e59a79785 
+
+Aleo Instructions doesn't represent arrays or strings well yet, nor does it support for/while loops. Meaning, you often have to
+get creative when working with characters. See "Game Logic" above for an example.
+
+__Testnet__
+
+At the time of this writing, the Testnet isn't publicly available. So, I can't speak to committing/querying records. 
+
+__Conclusion__
+
+Aleo might be the first chain to successfully implement privacy and speed while maintaining decetralization; however, 
+In alignment with a conversation we had with some of their team, I believe that learning development on Aleo is a 
+significant undertaking that may be difficult to monetize in the short term but could reap serious rewards in the long -
+especially once the team gets closer to a Mainnet deployment.
