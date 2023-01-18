@@ -17,6 +17,48 @@ trivial to fix and certainly will be in future implementations.
 - At some point, would love to pair this with reactle (https://reactle.vercel.app) an open-source wordle clone in react.
 This would really bring zordle to life!
 
+### Why Aleo?
+
+#### 01/18/23
+
+__Aleo__
+
+Privacy, speed, and decentralization are common platitudes of seemingly all new blockchain systems today. Unfortunately,
+in this space it is far too common to overpromise and underdeliver. Often chains prioritize one of these pillars
+while compromising another - all in the interest of development efficacy. However, I believe that Aleo differs from many
+chains in a unique way. __Aleo's protocol uses zero knowledge cryptography and zero knowledge proofs enabling transactions
+to be run trustlessly off chain, laying out the groundwork to intuitively build into privacy, speed, and 
+decentralization__. Meaning that Aleo can be developed uncompromisingly - provided that their protocol is scalable.
+
+__Development__
+
+In an effort to understand the fundamentals of Aleo, I opted to work with Aleo Instructions rather than their high level 
+language, Leo. Now, I can't speak to Leo becuase I'm unfamiliar but I'd probably recommend starting there instead.
+Development with Aleo Instructions is difficult, syntactically, conceptually, and otherwise. 
+
+Typical disadvantages of level languages aside, the docs are outtdated and sparse leading to a significant amount of 
+development time wasted on trial and error. At the time of writing this, some of the docs are incorrect as the 
+language is changing rapidly. For example, "interface" was changed to "struct" at some point, causing quite a bit of 
+confusion.
+
+Logic in Aleo is written with circuits, which is dissimilar to other paradigms I've worked with. I won't go into
+details about them but here's a good article: 
+https://medium.com/web3studio/simple-explanations-of-arithmetic-circuits-and-zero-knowledge-proofs-806e59a79785 
+
+Aleo Instructions doesn't represent arrays or strings well yet, nor does it support for/while loops. Meaning, you often have to
+get creative when working with characters. See "Game Logic" above for an example.
+
+__Testnet__
+
+At the time of this writing, the Testnet isn't publicly available. So, I can't speak to committing/querying records. 
+
+__Conclusion__
+
+Aleo might be the first chain to successfully implement privacy and speed while maintaining decetralization; however, 
+In alignment with a conversation we had with some of their team, I believe that learning development on Aleo is a 
+significant undertaking that may be difficult to monetize in the short term but could reap serious rewards in the long -
+especially once the team gets closer to a Mainnet deployment.
+
 ## Dependencies
 
 - aleo instructions: https://developer.aleo.org/aleo/installation
@@ -292,44 +334,3 @@ score: {2,2,2,0,1} (see "Guess Scoring" for more info)
 _although the game doesn't currently maintain state, p2 might continue by guessing again with the information they were
 given. eventually, the correct answer will yield a score of {2,2,2,2,2}_
 
-### Why Aleo?
-
-#### 01/18/23
-
-__Aleo__
-
-Privacy, speed, and decentralization are common platitudes of seemingly all new blockchain systems today. Unfortunately,
-in this space it is far too common to overpromise and underdeliver. Often chains prioritize one of these pillars
-while compromising another - all in the interest of development efficacy. However, I believe that Aleo differs from many
-chains in a unique way. __Aleo's protocol uses zero knowledge cryptography and zero knowledge proofs enabling transactions
-to be run trustlessly off chain, laying out the groundwork to intuitively build into privacy, speed, and 
-decentralization__. Meaning that Aleo can be developed uncompromisingly - provided that their protocol is scalable.
-
-__Development__
-
-In an effort to understand the fundamentals of Aleo, I opted to work with Aleo Instructions rather than their high level 
-language, Leo. Now, I can't speak to Leo becuase I'm unfamiliar but I'd probably recommend starting there instead.
-Development with Aleo Instructions is difficult, syntactically, conceptually, and otherwise. 
-
-Typical disadvantages of level languages aside, the docs are outtdated and sparse leading to a significant amount of 
-development time wasted on trial and error. At the time of writing this, some of the docs are incorrect as the 
-language is changing rapidly. For example, "interface" was changed to "struct" at some point, causing quite a bit of 
-confusion.
-
-Logic in Aleo is written with circuits, which is dissimilar to other paradigms I've worked with. I won't go into
-details about them but here's a good article: 
-https://medium.com/web3studio/simple-explanations-of-arithmetic-circuits-and-zero-knowledge-proofs-806e59a79785 
-
-Aleo Instructions doesn't represent arrays or strings well yet, nor does it support for/while loops. Meaning, you often have to
-get creative when working with characters. See "Game Logic" above for an example.
-
-__Testnet__
-
-At the time of this writing, the Testnet isn't publicly available. So, I can't speak to committing/querying records. 
-
-__Conclusion__
-
-Aleo might be the first chain to successfully implement privacy and speed while maintaining decetralization; however, 
-In alignment with a conversation we had with some of their team, I believe that learning development on Aleo is a 
-significant undertaking that may be difficult to monetize in the short term but could reap serious rewards in the long -
-especially once the team gets closer to a Mainnet deployment.
