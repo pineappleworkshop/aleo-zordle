@@ -1,0 +1,10 @@
+{
+    "program": "zordle.aleo",
+    "version": "0.0.0",
+    "description": "",
+    "development": {
+        "private_key": "APrivateKey1zkpAHC6rNBp81k5jHmQUCPuaxdghJzyhHFNq97W2m86aQR7",
+        "address": "aleo1gz24cpclw8xu50kt6zer0h8e8fqt5hns5d0kyyw8a9r3fhm7qgzqsy25h8"
+    },
+    "license": "MIT"
+}
