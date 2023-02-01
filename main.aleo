@@ -102,11 +102,11 @@ function score_guess:
     call u64_to_segs r0.word into r3;
     call u64_to_segs r1.word into r4;
 
-    call segment.aleo/score_seg r3.a0 0u8 r4 into r5;
-    call segment.aleo/score_seg r3.a1 1u8 r4 into r6;
-    call segment.aleo/score_seg r3.a2 2u8 r4 into r7;
-    call segment.aleo/score_seg r3.a3 3u8 r4 into r8;
-    call segment.aleo/score_seg r3.a4 4u8 r4 into r9;
+    call segment.aleo/score_seg r4.a0 0u8 r3 into r5;
+    call segment.aleo/score_seg r4.a1 1u8 r3 into r6;
+    call segment.aleo/score_seg r4.a2 2u8 r3 into r7;
+    call segment.aleo/score_seg r4.a3 3u8 r3 into r8;
+    call segment.aleo/score_seg r4.a4 4u8 r3 into r9;
 
     // todo: replace with guess response
     call scored_guess.aleo/new r5 r6 r7 r8 r9 r1.player r0.hashed_word r1.word into r10;
@@ -121,11 +121,11 @@ function score_words:
     call u64_to_segs r0 into r2;
     call u64_to_segs r1 into r3;
 
-    call segment.aleo/score_seg r2.a0 0u8 r3 into r4;
-    call segment.aleo/score_seg r2.a1 1u8 r3 into r5;
-    call segment.aleo/score_seg r2.a2 2u8 r3 into r6;
-    call segment.aleo/score_seg r2.a3 3u8 r3 into r7;
-    call segment.aleo/score_seg r2.a4 4u8 r3 into r8;
+    call segment.aleo/score_seg r3.a0 0u8 r2 into r4;
+    call segment.aleo/score_seg r3.a1 1u8 r2 into r5;
+    call segment.aleo/score_seg r3.a2 2u8 r2 into r6;
+    call segment.aleo/score_seg r3.a3 3u8 r2 into r7;
+    call segment.aleo/score_seg r3.a4 4u8 r2 into r8;
 
     output r4 as u8.private;
     output r5 as u8.private;
