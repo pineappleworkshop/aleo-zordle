@@ -1,6 +1,8 @@
-# Zordle (zk-wordle)
+# Aleodle (previously named zordle)
 
-Based on the popular game, "wordle" (https://www.nytimes.com/games/wordle/index.html)
+Play Aleodle: https://aleodle.pineappleworkshop.com/
+
+Based on the popular game, "wordle" https://www.nytimes.com/games/wordle/index.html
 
 ## Work in Progress!
 
@@ -13,9 +15,6 @@ owner specifed ruleset. Scoring will be based on how many attempts consumed befo
 
 - Lacking contraints. Currently, it is possible to cheat the game in more ways than one. However, these exploits are
 trivial to fix and certainly will be in future implementations.
-
-- At some point, would love to pair this with reactle (https://reactle.vercel.app) an open-source wordle clone in react.
-This would really bring zordle to life!
 
 ### Why Aleo?
 
